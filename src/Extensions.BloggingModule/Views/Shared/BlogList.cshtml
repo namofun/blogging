@@ -1,0 +1,35 @@
+﻿@model List<BlogPost>
+@{
+    Dictionary<int, BlogPostVote> pv = ViewBag.PostsVote;
+}
+
+@foreach (var p in Model)
+{
+    <div class="blog-content">
+        <h3><a class="text-decoration-none text-reset" asp-action="Entry" asp-controller="Blog" asp-route-postId="@p.Id">@p.Title</a></h3>
+        <p class="mb-4">By <a asp-area="Identity" asp-controller="Profile" asp-action="Show" asp-route-username="@p.UserDetail.UserName">@p.UserDetail.UserName</a>, <span title="@p.PublishTime">@Html.AutoUnitTimespan(DateTimeOffset.Now - p.PublishTime) ago</span><razor asp-show-if="p.Revision > 1">, revision @p.Revision</razor>.</p>
+        @Html.Raw(p.ContentHtml)
+        <p class="mb-3"><span class="voting" id="blog_vote"><partial name="VotingDetail" model="(p.Id, (int?)null, p.UpVotes, p.DownVotes, pv?.GetValueOrDefault(p.Id)?.Up)" /></span></p>
+        <hr class="mt-0 mb-4" />
+    </div>
+}
+
+<script type="text/javascript">
+    $(function () {
+        let $body = $('body');
+
+        $body.on('click', '.voter.enabled', function () {
+            notice('Your vote has been sent. It will be processed in a minute.');
+            ajaxget($(this).data("href"), '#' + $(this).parent().prop('id'));
+            return false;
+        });
+
+        $body.on('click', '.voter.disabled', function () {
+            notice('You cannot vote twice. You have already voted for this comment before.', 'danger');
+            return false;
+        });
+    });
+</script>
+
+<link rel="stylesheet" href="/lib/katex/katex.min.css" />
+<script defer src="/lib/katex/katex.min.js"></script>

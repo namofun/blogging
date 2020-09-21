@@ -1,0 +1,15 @@
+﻿@model (int postId, int? commentId, int up, int down, bool? exists)
+@{
+    var (suc, dan) = !Model.exists.HasValue
+        ? ("success", "danger")
+        : Model.exists.Value
+        ? ("dark", "muted")
+        : ("muted", "dark");
+    var (shows, color) = Model.up == Model.down
+        ? ("0", "dark")
+        : Model.up > Model.down
+        ? ("+" + (Model.up - Model.down), "success")
+        : ("-" + (Model.down - Model.up), "danger");
+    var url1 = Url.Action("VoteUp", "Blog", new { Model.postId, Model.commentId, act = !Model.exists.HasValue });
+    var url2 = Url.Action("VoteDown", "Blog", new { Model.postId, Model.commentId, act = !Model.exists.HasValue });
+}<a href="javascript:;" data-href="@url1" class="text-@suc @(suc == "muted" ? "disabled" : "enabled") text-decoration-none voter"><i class="fas fa-angle-up"></i></a><b class="ml-2 mr-2 text-@color">@shows</b><a href="javascript:;" data-href="@url2" class="text-@dan @(dan == "muted" ? "disabled" : "enabled") text-decoration-none voter"><i class="fas fa-angle-down"></i></a>
