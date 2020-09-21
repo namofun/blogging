@@ -2,12 +2,15 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
-    <DescriptionAttach>The blogging module</DescriptionAttach>
+    <DescriptionAttach>The blogging abstraction</DescriptionAttach>
+    <RootNamespace>Blogging</RootNamespace>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <Import Project="..\..\build\NugetPackage.props" />
 
   <ItemGroup>
+    <PackageReference Include="Markdig.Service" Version="0.18.3.1" />
     <PackageReference Include="SatelliteSite.Abstraction" Version="$(SubstrateVersion)" />
   </ItemGroup>
 
