@@ -1,0 +1,19 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <DescriptionAttach>The blogging implementation</DescriptionAttach>
+    <RootNamespace>Blogging</RootNamespace>
+  </PropertyGroup>
+
+  <Import Project="..\..\build\NugetPackage.props" />
+
+  <ItemGroup>
+    <PackageReference Include="SatelliteSite.DataAccess" Version="$(SubstrateVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Blogging.Abstraction\Blogging.Abstraction.csproj" />
+  </ItemGroup>
+
+</Project>
