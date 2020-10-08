@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Hosting;
+using SatelliteSite.IdentityModule.Entities;
 
 namespace SatelliteSite
 {
@@ -18,8 +19,8 @@ namespace SatelliteSite
         public static IHostBuilder CreateHostBuilder(string[] args) =>
             Host.CreateDefaultBuilder(args)
                 .MarkDomain<Program>()
-                .AddModule<IdentityModule.IdentityModule<DefaultContext>>()
-                .AddModule<BloggingModule.BloggingModule<DefaultContext>>()
+                .AddModule<IdentityModule.IdentityModule<User, Role, DefaultContext>>()
+                .AddModule<BloggingModule.BloggingModule<User, DefaultContext>>()
                 .AddDatabaseMssql<DefaultContext>("UserDbConnection")
                 .ConfigureSubstrateDefaults<DefaultContext>();
     }

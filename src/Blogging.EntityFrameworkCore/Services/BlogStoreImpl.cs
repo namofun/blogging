@@ -1,6 +1,5 @@
 ﻿using Blogging.Entities;
 using Microsoft.EntityFrameworkCore;
-using SatelliteSite.Entities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,7 +7,9 @@ using System.Threading.Tasks;
 
 namespace Blogging.Services
 {
-    public class BlogStore<TContext> : IBlogStore where TContext : DbContext
+    public class BlogStore<TUser, TContext> : IBlogStore
+        where TUser : SatelliteSite.IdentityModule.Entities.User
+        where TContext : DbContext
     {
         public TContext Context { get; }
 
@@ -58,7 +59,7 @@ namespace Blogging.Services
                 lst = lst.Where(p => p.CommonShared);
             var lst2 =
                 from p in lst
-                join u in Context.Set<User>() on p.UserId equals u.Id
+                join u in Context.Set<TUser>() on p.UserId equals u.Id
                 select new { p, u.UserName, u.Email };
             var lst3 = await lst2
                 .OrderByDescending(a => a.p.Id)
@@ -80,7 +81,7 @@ namespace Blogging.Services
             var post2Query =
                 from p in Context.Set<BlogPost>()
                 where p.Id == postId
-                join u in Context.Set<User>() on p.UserId equals u.Id
+                join u in Context.Set<TUser>() on p.UserId equals u.Id
                 select new { p, u.UserName, u.Email };
             var post2 = await post2Query.SingleOrDefaultAsync();
             if (post2 == null) return null;
@@ -91,7 +92,7 @@ namespace Blogging.Services
             var comment2Query =
                 from c in Context.Set<BlogComment>()
                 where c.PostId == postId
-                join u in Context.Set<User>() on c.UserId equals u.Id
+                join u in Context.Set<TUser>() on c.UserId equals u.Id
                 select new { c, u.UserName, u.Email };
             var comments2 = await comment2Query.ToListAsync();
             var dict = comments2.ToDictionary(k => k.c.Id, k => k.c);

@@ -10,11 +10,11 @@
 
   <ItemGroup>
     <PackageReference Include="SatelliteSite.Substrate" Version="$(SubstrateVersion)" />
-    <PackageReference Include="SatelliteSite.IdentityModule" Version="$(SubstrateVersion)" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\Blogging.Abstraction\Blogging.Abstraction.csproj" />
+    <ProjectReference Include="..\Blogging.EntityFrameworkCore\Blogging.EntityFrameworkCore.csproj" />
   </ItemGroup>
 
 </Project>

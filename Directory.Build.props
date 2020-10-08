@@ -1,5 +1,7 @@
 ﻿<Project>
   <PropertyGroup>
     <GitRepositoryDirectory>$(MSBuildThisFileDirectory).git</GitRepositoryDirectory>
+    <SubstrateVersion>1.0.0-preview9</SubstrateVersion>
+    <PreviewBuild>9</PreviewBuild>
   </PropertyGroup>
 </Project>

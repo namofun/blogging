@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SatelliteSite.BloggingModule.Controllers
 {
-    [Area("Misc")]
+    [Area("Blog")]
     [Route("[controller]")]
     public class BlogController : ViewControllerBase
     {
@@ -46,8 +46,10 @@ namespace SatelliteSite.BloggingModule.Controllers
         }
 
         [HttpGet("{username?}")]
-        public async Task<IActionResult> List(string username,
-            [FromServices] UserManager userManager, int page = 1)
+        public async Task<IActionResult> List(
+            [FromRoute] string username,
+            [FromServices] IUserManager userManager,
+            [FromQuery] int page = 1)
         {
             if (page <= 0) return NotFound();
             int? uid = null;

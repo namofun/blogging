@@ -8,7 +8,9 @@ using Microsoft.Extensions.DependencyInjection;
 
 namespace SatelliteSite.BloggingModule
 {
-    public class BloggingModule<TContext> : AbstractModule where TContext : DbContext
+    public class BloggingModule<TUser, TContext> : AbstractModule
+        where TUser : SatelliteSite.IdentityModule.Entities.User
+        where TContext : DbContext
     {
         public override string Area => "Blog";
 
@@ -26,9 +28,9 @@ namespace SatelliteSite.BloggingModule
             services.AddMarkdown();
             services.AddTransient<IMarkdownResolver, DefaultMarkdownResolver>();
 
-            services.AddScoped<IBlogStore, BlogStore<TContext>>();
+            services.AddScoped<IBlogStore, BlogStore<TUser, TContext>>();
             services.AddScoped<ICommentStore, CommentStore<TContext>>();
-            services.AddDbModelSupplier<TContext, BlogEntityConfiguration<TContext>>();
+            services.AddDbModelSupplier<TContext, BlogEntityConfiguration<TUser, TContext>>();
         }
     }
 }

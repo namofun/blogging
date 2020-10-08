@@ -4,12 +4,14 @@
     <TargetFramework>netstandard2.0</TargetFramework>
     <DescriptionAttach>The blogging implementation</DescriptionAttach>
     <RootNamespace>Blogging</RootNamespace>
+    <LangVersion>8.0</LangVersion>
   </PropertyGroup>
 
   <Import Project="..\..\build\NugetPackage.props" />
 
   <ItemGroup>
     <PackageReference Include="SatelliteSite.DataAccess" Version="$(SubstrateVersion)" />
+    <PackageReference Include="SatelliteSite.IdentityCore" Version="$(SubstrateVersion)" />
   </ItemGroup>
 
   <ItemGroup>

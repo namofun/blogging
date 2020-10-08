@@ -1,10 +1,9 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
-using SatelliteSite.Entities;
 
 namespace Blogging.Entities
 {
-    public class BlogEntityConfiguration<TContext> :
+    public class BlogEntityConfiguration<TUser, TContext> :
         EntityTypeConfigurationSupplier<TContext>,
         IEntityTypeConfiguration<BlogPost>,
         IEntityTypeConfiguration<BlogPostVote>,
@@ -12,12 +11,13 @@ namespace Blogging.Entities
         IEntityTypeConfiguration<BlogCommentVote>,
         IEntityTypeConfiguration<BlogRevision>
         where TContext : DbContext
+        where TUser : SatelliteSite.IdentityModule.Entities.User
     {
         public void Configure(EntityTypeBuilder<BlogPost> entity)
         {
             entity.HasKey(e => e.Id);
 
-            entity.HasOne<User>()
+            entity.HasOne<TUser>()
                 .WithMany()
                 .HasForeignKey(e => e.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
@@ -35,7 +35,7 @@ namespace Blogging.Entities
                 .HasForeignKey(e => e.PostId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            entity.HasOne<User>()
+            entity.HasOne<TUser>()
                 .WithMany()
                 .HasForeignKey(e => e.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
@@ -55,7 +55,7 @@ namespace Blogging.Entities
                 .HasForeignKey(e => e.ReplyToId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            entity.HasOne<User>()
+            entity.HasOne<TUser>()
                 .WithMany()
                 .HasForeignKey(e => e.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
@@ -73,7 +73,7 @@ namespace Blogging.Entities
                 .HasForeignKey(e => e.CommentId)
                 .OnDelete(DeleteBehavior.Restrict);
 
-            entity.HasOne<User>()
+            entity.HasOne<TUser>()
                 .WithMany()
                 .HasForeignKey(e => e.UserId)
                 .OnDelete(DeleteBehavior.Restrict);
