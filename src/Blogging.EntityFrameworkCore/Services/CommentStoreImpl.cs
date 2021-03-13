@@ -93,16 +93,11 @@ namespace Blogging.Services
             }
             else
             {
-                ok = 1 == await Context.Set<BlogCommentVote>().MergeAsync(
-                    sourceTable: from c in Context.Set<BlogComment>()
-                                 where c.Id == CommentId && c.PostId == PostId
-                                 select new { c.PostId, CommentId = c.Id, UserId, ToBe.Value },
-                    targetKey: k => new { k.CommentId, k.UserId },
-                    sourceKey: k => new { k.CommentId, k.UserId },
-                    updateExpression: null,
-                    delete: false,
-
-                    insertExpression: s => new BlogCommentVote
+                ok = 1 == await Context.Set<BlogCommentVote>().UpsertAsync(
+                    from c in Context.Set<BlogComment>()
+                    where c.Id == CommentId && c.PostId == PostId
+                    select new { c.PostId, CommentId = c.Id, UserId, ToBe.Value },
+                    s => new BlogCommentVote
                     {
                         Up = s.Value,
                         CommentId = s.CommentId,
