@@ -28,8 +28,9 @@ namespace SatelliteSite.BloggingModule
             services.AddMarkdown();
             services.AddTransient<IMarkdownResolver, DefaultMarkdownResolver>();
 
-            services.AddScoped<IBlogStore, BlogStore<TUser, TContext>>();
-            services.AddScoped<ICommentStore, CommentStore<TContext>>();
+            services.AddScoped<IBloggingFacade, BloggingFacade<TUser, TContext>>();
+            services.AddScopedUpcast<IBlogStore, BloggingFacade<TUser, TContext>>();
+            services.AddScopedUpcast<ICommentStore, BloggingFacade<TUser, TContext>>();
             services.AddDbModelSupplier<TContext, BlogEntityConfiguration<TUser, TContext>>();
         }
     }
