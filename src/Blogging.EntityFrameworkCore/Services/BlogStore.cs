@@ -7,20 +7,8 @@ using System.Threading.Tasks;
 
 namespace Blogging.Services
 {
-    public class BlogStore<TUser, TContext> : IBlogStore
-        where TUser : SatelliteSite.IdentityModule.Entities.User
-        where TContext : DbContext
+    public partial class BloggingFacade<TUser, TContext> : IBlogStore
     {
-        public TContext Context { get; }
-
-        public IMarkdownResolver Markdown { get; }
-
-        public BlogStore(TContext context, IMarkdownResolver markdown)
-        {
-            Context = context;
-            Markdown = markdown;
-        }
-
         public Task DeleteAsync(BlogPost post)
         {
             return Context.Set<BlogPost>()
@@ -205,11 +193,11 @@ namespace Blogging.Services
                 .ToDictionaryAsync(k => k.PostId);
         }
 
-        public async Task<(int, int, BlogPostVote)> StatisticsAsync(int blogIds, int userId)
+        async Task<(int, int, BlogPostVote)> IBlogStore.StatisticsAsync(int blogId, int userId)
         {
             var query =
                 from c in Context.Set<BlogPost>()
-                where c.Id == blogIds
+                where c.Id == blogId
                 join v in Context.Set<BlogPostVote>() on new { c.Id, UserId = userId } equals new { Id = v.PostId, v.UserId }
                 into vv from v in vv.DefaultIfEmpty()
                 select new { c.UpVotes, c.DownVotes, v };

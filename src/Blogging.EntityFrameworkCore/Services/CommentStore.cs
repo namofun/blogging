@@ -7,19 +7,9 @@ using System.Threading.Tasks;
 
 namespace Blogging.Services
 {
-    public class CommentStore<TContext> : ICommentStore where TContext : DbContext
+    public partial class BloggingFacade<TUser, TContext> : ICommentStore
     {
-        public TContext Context { get; }
-
-        public IMarkdownResolver Markdown { get; }
-
-        public CommentStore(TContext context, IMarkdownResolver markdown)
-        {
-            Context = context;
-            Markdown = markdown;
-        }
-
-        public async Task<BlogComment> CreateAsync(BlogPost post, int uid, string contentMd, BlogComment replyTo = null)
+        public async Task<BlogComment> CreateAsync(BlogPost post, int uid, string contentMd, BlogComment replyTo)
         {
             var e = Context.Set<BlogComment>().Add(new BlogComment
             {
@@ -128,7 +118,7 @@ namespace Blogging.Services
             return true;
         }
 
-        public Task<Dictionary<int, BlogCommentVote>> StatisticsAsync(int blogId, int userId)
+        Task<Dictionary<int, BlogCommentVote>> ICommentStore.StatisticsAsync(int blogId, int userId)
         {
             return Context.Set<BlogCommentVote>()
                 .Where(v => v.PostId == blogId && v.UserId == userId)
