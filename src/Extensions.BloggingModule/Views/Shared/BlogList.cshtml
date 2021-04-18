@@ -5,13 +5,20 @@
 
 @foreach (var p in Model)
 {
-    <div class="blog-content">
-        <h3><a class="text-decoration-none text-reset" asp-action="Entry" asp-controller="Blog" asp-route-postId="@p.Id">@p.Title</a></h3>
-        <p class="mb-4">By <a asp-area="Identity" asp-controller="Profile" asp-action="Show" asp-route-username="@p.UserDetail.UserName">@p.UserDetail.UserName</a>, <span title="@p.PublishTime">@Html.AutoUnitTimespan(DateTimeOffset.Now - p.PublishTime) ago</span><razor asp-show-if="p.Revision > 1">, revision @p.Revision</razor>.</p>
-        @Html.Raw(p.ContentHtml)
-        <p class="mb-3"><span class="voting" id="blog_vote"><partial name="VotingDetail" model="(p.Id, (int?)null, p.UpVotes, p.DownVotes, pv?.GetValueOrDefault(p.Id)?.Up)" /></span></p>
-        <hr class="mt-0 mb-4" />
-    </div>
+<div class="card window-card container-fluid">
+<div class="card-body">
+<div class="blog-title">
+    <h2><a class="text-decoration-none text-reset" asp-action="Entry" asp-controller="Blog" asp-route-postId="@p.Id">@p.Title</a></h2>
+    <p class="mb-4">By <a asp-area="Account" asp-controller="Profile" asp-action="Show" asp-route-username="@p.UserDetail.UserName">@p.UserDetail.UserName</a>, <span title="@p.PublishTime">@Html.AutoUnitTimespan(DateTimeOffset.Now - p.PublishTime) ago</span><razor asp-show-if="p.Revision > 1">, revision @p.Revision</razor>.</p>
+</div>
+<div class="blog-content">
+    @Html.Raw(p.ContentHtml)
+</div>
+<p class="mb-0">
+    <span class="voting" id="blog_vote"><partial name="VotingDetail" model="(p.Id, (int?)null, p.UpVotes, p.DownVotes, pv?.GetValueOrDefault(p.Id)?.Up)" /></span>
+</p>
+</div>
+</div>
 }
 
 <script type="text/javascript">
