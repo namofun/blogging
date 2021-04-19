@@ -154,3 +154,47 @@
   font-weight: 500;
   color: #343a40;
 }
+
+
+/* Blogging section */
+.blog-line-separator {
+  margin-top: 1.5em;
+  margin-bottom: 2em;
+  border-color: rgba(0,0,0,.125);
+}
+
+@media (min-width: 576px) {
+  .blog-line-separator {
+    margin-left: -1.5rem;
+    margin-right: -1.5rem;
+  }
+}
+
+.blog-line-separator-end {
+  margin-top: 2em;
+  margin-bottom: 1.5em;
+}
+
+.blog-content h1, .blog-content .h1 {
+  font-size: 1.9em;
+}
+
+.blog-content h2, .blog-content .h2 {
+  font-size: 1.75em;
+}
+
+.blog-content h3, .blog-content .h3 {
+  font-size: 1.6em;
+}
+
+.blog-content h4, .blog-content .h4 {
+  font-size: 1.4em;
+}
+
+.blog-content h5, .blog-content .h5 {
+  font-size: 1.2em;
+}
+
+.blog-content h6, .blog-content .h6 {
+  font-size: 1em;
+}
