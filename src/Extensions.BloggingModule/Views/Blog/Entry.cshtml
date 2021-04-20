@@ -9,97 +9,98 @@
     {
         foreach (var comment in comments ?? Array.Empty<BlogComment>())
         {
-            <div class="comment media" id="C@(comment.Id)" style="margin-left:@(level*2)em">
-                <div class="comment-avatar mr-3 text-center">
-                    <div class="d-block"><img gravatar-email="@comment.UserDetail.Email" style="height:64px;width:64px" /></div>
-                    <a asp-area="Identity" asp-controller="Profile" asp-action="Show" asp-route-username="@comment.UserDetail.UserName">@comment.UserDetail.UserName</a>
-                </div>
-                <div class="media-body">
-                    <div class="comment-toolbar text-muted mb-1" style="font-size:0.8em">
-                        <span>@Html.AutoUnitTimespan(DateTimeOffset.Now - comment.PublishTime) ago</span>,
-                        <razor asp-show-if="comment.Revision > 1">rev. @comment.Revision,</razor>
-                        <a class="text-muted text-decoration-none" asp-fragment="C@(comment.Id)"><i class="far fa-share-square"></i></a>
-                        <a class="text-muted text-decoration-none" asp-show-if="comment.ReplyToId.HasValue" data-toggle="ajaxWindow" data-target="delete-comment" href="#C@(comment.ReplyToId)"><i class="far fa-caret-square-left"></i></a>
-                        <a class="text-muted text-decoration-none" asp-show-if="comment.UserId == uid && !comment.IsDeleted" data-toggle="ajaxWindow" data-target="delete-comment" asp-action="DeleteComment" asp-route-postId="@comment.PostId" asp-route-commentId="@comment.Id"><i class="far fa-trash-alt"></i></a>
-                        <a class="text-muted text-decoration-none" asp-show-if="!comment.IsDeleted" asp-in-roles="Administrator" asp-action="DeleteComment" data-toggle="ajaxWindow" data-target="delete-comment" asp-route-postId="@comment.PostId" asp-route-commentId="@comment.Id"><i class="fa fa-ban"></i></a>
-                        <span class="float-right voting" id="C@(comment.Id)v"><partial name="VotingDetail" model="(comment.PostId, (int?)comment.Id, comment.UpVotes, comment.DownVotes, cv?.GetValueOrDefault(comment.Id)?.Up)" /></span>
-                    </div>
-                    <div class="comment-content">
-                        @if (comment.IsDeleted)
-                        {
-                            @:<small style="color:rgba(127,0,0,0.4)">This comment has been deleted.</small>
-                        }
-                        else if (comment.UpVotes - comment.DownVotes < -40)
-                        {
-                            <small class="comment-hidden">
-                                The comment is hidden because of too negative feedback, click <a class="neg-feedback-show" href="javascript:;">here</a> to view it.
-                            </small>
-                            <div class="comment-hidden d-none">
-                                @Html.Raw(comment.ContentHtml)
-                            </div>
-                        }
-                        else if (comment.UpVotes - comment.DownVotes < -10)
-                        {
-                            <div class="comment-hidden">
-                                @Html.Raw(comment.ContentHtml)
-                            </div>
-                        }
-                        else
-                        {
-                            @Html.Raw(comment.ContentHtml)
-                        }
-                    </div>
-                    <p class="mb-0"><small><a href="javascript:;" class="text-muted replier" data-comment-id="@comment.Id">→ Reply</a></small></p>
-                </div>
+<div class="comment-scope">
+    <div class="comment-line">
+        @for (int i = 0; i < level; i++) {<div class="comment-raquo">&raquo;</div>}
+        <div class="comment media" id="C@(comment.Id)">
+            <div class="comment-avatar mr-3 text-center">
+                <div class="d-block"><img gravatar-email="@comment.UserDetail.Email" style="height:64px;width:64px" /></div>
+                <a asp-area="Account" asp-controller="Profile" asp-action="Show" asp-route-username="@comment.UserDetail.UserName">@comment.UserDetail.UserName</a>
             </div>
-            @await DisplayComment(comment.Replies, level + 1)
+            <div class="media-body">
+                <div class="comment-toolbar text-muted mb-1" style="font-size:0.8em">
+                    <span>@Html.AutoUnitTimespan(DateTimeOffset.Now - comment.PublishTime) ago</span>,
+                    <razor asp-show-if="comment.Revision > 1">rev. @comment.Revision,</razor>
+                    <a class="text-muted text-decoration-none" asp-fragment="C@(comment.Id)" title="share this comment"><i class="far fa-share-square"></i></a>
+                    <a class="text-muted text-decoration-none" asp-show-if="comment.ReplyToId.HasValue" href="#C@(comment.ReplyToId)" title="parent comment"><i class="far fa-caret-square-left"></i></a>
+                    <a class="text-muted text-decoration-none" asp-show-if="comment.UserId == uid && !comment.IsDeleted" data-toggle="ajaxWindow" data-target="delete-comment" asp-action="DeleteComment" asp-route-postId="@comment.PostId" asp-route-commentId="@comment.Id" title="delete this comment"><i class="far fa-trash-alt"></i></a>
+                    <a class="text-muted text-decoration-none" asp-show-if="!comment.IsDeleted" asp-in-roles="Administrator" asp-action="DeleteComment" data-toggle="ajaxWindow" data-target="delete-comment" asp-route-postId="@comment.PostId" asp-route-commentId="@comment.Id" title="ban this comment"><i class="fa fa-ban"></i></a>
+                    <span class="float-right voting" id="C@(comment.Id)v"><partial name="VotingDetail" model="(comment.PostId, (int?)comment.Id, comment.UpVotes, comment.DownVotes, cv?.GetValueOrDefault(comment.Id)?.Up)" /></span>
+                </div>
+                <div class="comment-content">
+                    @if (comment.IsDeleted)
+                    {
+                        @:<small style="color:rgba(127,0,0,0.4)">This comment has been deleted.</small>
+                    }
+                    else if (comment.UpVotes - comment.DownVotes < -40)
+                    {
+                        <small class="comment-hidden">
+                            The comment is hidden because of too negative feedback, click <a class="neg-feedback-show" href="javascript:;">here</a> to view it.
+                        </small>
+                        <div class="comment-hidden d-none">
+                            @Html.Raw(comment.ContentHtml)
+                        </div>
+                    }
+                    else if (comment.UpVotes - comment.DownVotes < -10)
+                    {
+                        <div class="comment-hidden">
+                            @Html.Raw(comment.ContentHtml)
+                        </div>
+                    }
+                    else
+                    {
+                        @Html.Raw(comment.ContentHtml)
+                    }
+                </div>
+                <p class="mb-0"><small><a href="javascript:;" class="text-muted replier" data-comment-id="@comment.Id">→ Reply</a></small></p>
+            </div>
+        </div>
+    </div>
+    @await DisplayComment(comment.Replies, level + 1)
+</div>
         }
         return "";
     }
 }
 
-<div class="container-fluid pl-0 pr-0" style="max-width:960px">
-    <partial name="_StatusMessage" model="@TempData["StatusMessage"]" />
-    @{ TempData.Remove("StatusMessage"); }
-    <h2 class="mt-3">@Model.Title</h2>
-    <p class="mb-4">By <a asp-area="Identity" asp-controller="Profile" asp-action="Show" asp-route-username="@Model.UserDetail.UserName">@Model.UserDetail.UserName</a>, <span title="@Model.PublishTime">@Html.AutoUnitTimespan(DateTimeOffset.Now - Model.PublishTime) ago</span><razor asp-show-if="Model.Revision > 1">, revision @Model.Revision</razor><razor asp-show-if="Model.UserId.ToString() == User.GetUserId()">, <a asp-action="Publish">edit</a></razor>.</p>
+<link rel="stylesheet" href="/lib/site-blog/main.css" />
+
+<div class="row">
+<div class="container card-container">
+
+<partial name="_StatusMessage" model="@TempData["StatusMessage"]" />
+@{ TempData.Remove("StatusMessage"); }
+
+<div class="card window-card container-fluid">
+<div class="card-body">
+<div class="blog-title">
+    <h2><a class="text-decoration-none text-reset" asp-action="Entry" asp-controller="Blog" asp-route-postId="@Model.Id">@Model.Title</a></h2>
+    <p class="mb-0">By <a asp-area="Account" asp-controller="Profile" asp-action="Show" asp-route-username="@Model.UserDetail.UserName">@Model.UserDetail.UserName</a>, <span title="@Model.PublishTime">@Html.AutoUnitTimespan(DateTimeOffset.Now - Model.PublishTime) ago</span><razor asp-show-if="Model.Revision > 1">, revision @Model.Revision</razor><razor asp-show-if="Model.UserId.ToString() == User.GetUserId()">, <a asp-action="Publish">edit</a></razor>.</p>
+</div>
+<hr class="blog-line-separator" />
+<div class="blog-content">
     @Html.Raw(Model.ContentHtml)
-    <p class="mb-3"><span class="voting" id="blog_vote"><partial name="VotingDetail" model="(Model.Id, (int?)null, Model.UpVotes, Model.DownVotes, pv?.Up)" /></span></p>
-    <hr class="mt-0 mb-4" />
-    <h4>Comments</h4>
-    @await DisplayComment(Model.Comments, 0)
-    <form class="reply-content mt-3" asp-action="Comment" asp-route-postId="@Model.Id">
-        <textarea class="form-control mt-2 mb-2" name="content" placeholder="My comments..." maxlength="1024"></textarea>
-        <button type="submit" class="btn btn-primary btn-sm float-right">submit</button>
-        <button type="reset" class="btn btn-secondary btn-sm float-right mr-2 canceller">cancel</button>
-    </form>
+</div>
+<hr class="blog-line-separator blog-line-separator-end" />
+<p class="mb-0">
+    <span class="voting" id="blog_vote_@(Model.Id)"><partial name="VotingDetail" model="(Model.Id, (int?)null, Model.UpVotes, Model.DownVotes, pv?.Up)" /></span>
+</p>
+</div>
 </div>
 
-<style type="text/css">
-    .comment {
-        padding: 1em
-    }
+<div class="card window-card container-fluid">
+<div class="card-body">
+<h3 class="mb-3">Comments</h3>
+@await DisplayComment(Model.Comments, 0)
+<form class="reply-content mt-3" asp-action="Comment" asp-route-postId="@Model.Id">
+    <textarea class="form-control mt-2 mb-2" name="content" placeholder="My comments..." maxlength="1024"></textarea>
+    <button type="submit" class="btn btn-primary btn-sm float-right">submit</button>
+</form>
+</div>
+</div>
 
-        .comment:hover {
-            background-color: #f7f7f7;
-        }
-
-    .comment-hidden {
-        opacity: 0.5;
-    }
-
-        .comment-hidden:hover {
-            opacity: 1;
-        }
-
-    .comment-content p {
-        margin-bottom: 0.25em;
-    }
-
-    .comment-content :last-child {
-        margin-bottom: 0;
-    }
-</style>
+</div>
+</div>
 
 <div class="d-none" id="replyTemplate">
     <form class="reply-content" asp-action="Comment" asp-route-postId="@Model.Id">
@@ -146,6 +147,3 @@
         });
     });
 </script>
-
-<link rel="stylesheet" href="/lib/katex/katex.min.css" />
-<script defer src="/lib/katex/katex.min.js"></script>
