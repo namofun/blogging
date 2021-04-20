@@ -198,3 +198,36 @@
 .blog-content h6, .blog-content .h6 {
   font-size: 1em;
 }
+
+.card-pagination > .card-body {
+  padding-bottom: 0;
+  padding-top: 0;
+}
+
+.card-pagination > .card-body > ul.pagination {
+  margin-bottom: 0;
+}
+
+@media (min-width: 576px) {
+  .card-pagination > .card-body {
+    padding: 0.6rem 0.5rem;
+  }
+
+  .card-pagination .pagination > .page-item:first-child > .page-link,
+  .card-pagination .pagination > .page-item:last-child > .page-link {
+    border-radius: 1.125rem;
+  }
+
+  .card-pagination .page-link {
+    border-color: rgba(0,0,0,.125);
+    border-radius: 1.125rem;
+    border: none;
+    height: 2.25rem;
+    width: 2.25rem;
+    line-height: 1.7rem;
+    font-size: 0.9rem;
+    text-align: center;
+    margin-left: 0.1rem;
+    margin-right: 0.1rem;
+  }
+}
