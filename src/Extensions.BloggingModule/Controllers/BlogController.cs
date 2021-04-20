@@ -55,6 +55,7 @@ namespace SatelliteSite.BloggingModule.Controllers
             {
                 var user = await userManager.FindByNameAsync(username);
                 if (user == null) return NotFound();
+                ViewBag.User = user;
                 uid = user.Id;
             }
 
@@ -70,7 +71,7 @@ namespace SatelliteSite.BloggingModule.Controllers
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator,BlogPublisher")]
         [HttpGet("[action]")]
         public IActionResult Publish()
         {
@@ -96,7 +97,7 @@ namespace SatelliteSite.BloggingModule.Controllers
         }
 
 
-        [Authorize(Roles = "Administrator")]
+        [Authorize(Roles = "Administrator,BlogPublisher")]
         [HttpPost("[action]")]
         public async Task<IActionResult> Publish(BlogPublishModel model)
         {
@@ -120,7 +121,7 @@ namespace SatelliteSite.BloggingModule.Controllers
             var toEdit = await Facade.Blogs.QuickFindAsync(postId);
             if (toEdit == null || toEdit.UserId != uid) return NotFound();
 
-            toEdit.CommonShared = model.ShowOnHomePage;
+            model.ShowOnHomePage &= User.IsInRole("Administrator");
             await Facade.Blogs.ReviseAsync(toEdit, model.Title ?? "UNTITLED", model.Content, model.ShowOnHomePage);
 
             StatusMessage = "Blog has been edited.";
@@ -132,7 +133,7 @@ namespace SatelliteSite.BloggingModule.Controllers
         [HttpPost("entry/{postId}/[action]")]
         public async Task<IActionResult> Comment(int postId, string content, int? replyTo = null)
         {
-            if (content.Length > 1024)
+            if (content == null || content.Length > 1024)
                 return BadRequest();
 
             var model = await Facade.Blogs.QuickFindAsync(postId);

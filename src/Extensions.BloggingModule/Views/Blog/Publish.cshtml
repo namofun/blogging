@@ -17,7 +17,7 @@
         <input class="form-control" asp-for="Title" />
     </div>
 
-    <div class="form-group">
+    <div class="form-group" asp-in-roles="Administrator">
         <label class="font-weight-bold">Activity</label>
         <div class="custom-control custom-checkbox">
             <input type="checkbox" class="custom-control-input" asp-for="ShowOnHomePage" id="isactive">

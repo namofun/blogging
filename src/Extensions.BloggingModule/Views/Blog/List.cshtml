@@ -2,6 +2,7 @@
 @{
     ViewData["Title"] = "Blogs";
     Dictionary<int, BlogPostVote> pv = ViewBag.PostsVote;
+    IUser user = ViewBag.User;
 }
 <link rel="stylesheet" href="/lib/site-blog/main.css" />
 
@@ -15,7 +16,7 @@
 <div class="card-body">
 <h2 class="mb-3">Blogs</h2>
 <p class="mb-0">
-    <a asp-in-roles="Administrator" asp-action="Publish" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Publish</a>
+    <a asp-show-if="user == null || user.Id.ToString() == User.GetUserId()" asp-in-roles="Administrator,BlogPublisher" asp-action="Publish" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Publish</a>
 </p>
 </div>
 </div>

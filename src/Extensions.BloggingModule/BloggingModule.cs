@@ -5,6 +5,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
+using SatelliteSite;
+
+[assembly: RoleDefinition(25, "BlogPublisher", "blogger", "Blog Publisher")]
 
 namespace SatelliteSite.BloggingModule
 {
