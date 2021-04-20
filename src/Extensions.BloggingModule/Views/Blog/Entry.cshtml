@@ -92,10 +92,12 @@
 <div class="card-body">
 <h3 class="mb-3">Comments</h3>
 @await DisplayComment(Model.Comments, 0)
-<form class="reply-content mt-3" asp-action="Comment" asp-route-postId="@Model.Id">
-    <textarea class="form-control mt-2 mb-2" name="content" placeholder="My comments..." maxlength="1024"></textarea>
-    <button type="submit" class="btn btn-primary btn-sm float-right">submit</button>
-</form>
+
+<div class="comment-leave-wrapper">
+<div class="comment-leave">
+    <p class="mb-0 mt-3"><a href="javascript:;" class="text-muted replier" data-comment-id="">→ Leave a comment</a></p>
+</div>
+</div>
 </div>
 </div>
 
@@ -104,7 +106,7 @@
 
 <div class="d-none" id="replyTemplate">
     <form class="reply-content" asp-action="Comment" asp-route-postId="@Model.Id">
-        <textarea class="form-control mt-2 mb-2" name="content" maxlength="1024"></textarea>
+        <textarea class="form-control mt-2 mb-2" name="content" maxlength="1024" placeholder="My comments..."></textarea>
         <button type="submit" class="btn btn-primary btn-sm float-right">submit</button>
         <button type="reset" class="btn btn-secondary btn-sm float-right mr-2 canceller">cancel</button>
     </form>
@@ -127,7 +129,7 @@
 
         $body.on('click', '.commentReplyTo button[type="reset"]', function () {
             let $commentReplyTo = $(this).parent().parent();
-            $('#C' + $commentReplyTo.data('comment-id') + ' .replier').attr('disabled', false);
+            $commentReplyTo.parent().find('.replier').attr('disabled', false);
             $commentReplyTo.remove();
             return false;
         });
