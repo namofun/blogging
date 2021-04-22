@@ -15,7 +15,12 @@ namespace Blogging.Entities
     {
         public void Configure(EntityTypeBuilder<BlogPost> entity)
         {
+            entity.ToTable("BlogPosts");
+
             entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.Id)
+                .HasColumnName("PostId");
 
             entity.HasOne<TUser>()
                 .WithMany()
@@ -28,6 +33,8 @@ namespace Blogging.Entities
 
         public void Configure(EntityTypeBuilder<BlogPostVote> entity)
         {
+            entity.ToTable("BlogPostVotes");
+
             entity.HasKey(e => new { e.PostId, e.UserId });
 
             entity.HasOne<BlogPost>()
@@ -43,7 +50,12 @@ namespace Blogging.Entities
 
         public void Configure(EntityTypeBuilder<BlogComment> entity)
         {
+            entity.ToTable("BlogComments");
+
             entity.HasKey(e => e.Id);
+
+            entity.Property(e => e.Id)
+                .HasColumnName("CommentId");
 
             entity.HasOne<BlogPost>()
                 .WithMany()
@@ -66,6 +78,8 @@ namespace Blogging.Entities
 
         public void Configure(EntityTypeBuilder<BlogCommentVote> entity)
         {
+            entity.ToTable("BlogCommentVotes");
+
             entity.HasKey(e => new { e.CommentId, e.UserId });
 
             entity.HasOne<BlogComment>()
@@ -88,11 +102,13 @@ namespace Blogging.Entities
 
         public void Configure(EntityTypeBuilder<BlogRevision> entity)
         {
+            entity.ToTable("BlogRevisions");
+
             entity.HasKey(e => e.RevisionId);
 
             entity.HasOne<BlogPost>()
                 .WithMany()
-                .HasForeignKey(e => e.BlogId)
+                .HasForeignKey(e => e.PostId)
                 .OnDelete(DeleteBehavior.Restrict);
 
             entity.HasOne<BlogComment>()

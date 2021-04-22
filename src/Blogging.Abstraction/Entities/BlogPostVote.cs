@@ -1,19 +1,22 @@
 ﻿namespace Blogging.Entities
 {
+    /// <summary>
+    /// The entity class for voting posts.
+    /// </summary>
     public class BlogPostVote
     {
         /// <summary>
-        /// 博客文章ID
+        /// The post ID
         /// </summary>
         public int PostId { get; set; }
 
         /// <summary>
-        /// 投票用户ID
+        /// The user ID
         /// </summary>
         public int UserId { get; set; }
 
         /// <summary>
-        /// 评价
+        /// Whether the vote is up or down
         /// </summary>
         public bool Up { get; set; }
     }

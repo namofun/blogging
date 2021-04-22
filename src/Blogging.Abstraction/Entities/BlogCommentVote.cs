@@ -1,25 +1,29 @@
 ﻿namespace Blogging.Entities
 {
+    /// <summary>
+    /// The entity class for voting comments.
+    /// </summary>
     public class BlogCommentVote
     {
         /// <summary>
-        /// 评论ID
+        /// The comment ID
         /// </summary>
         public int CommentId { get; set; }
 
         /// <summary>
-        /// 投票用户ID
+        /// The user ID
         /// </summary>
         public int UserId { get; set; }
 
         /// <summary>
-        /// 评价
+        /// Whether the vote is up or down
         /// </summary>
         public bool Up { get; set; }
 
         /// <summary>
-        /// 对应博文ID的冗余字段
+        /// The post ID
         /// </summary>
+        /// <remarks>Redundant for fetching all the vote results.</remarks>
         public int PostId { get; set; }
     }
 }

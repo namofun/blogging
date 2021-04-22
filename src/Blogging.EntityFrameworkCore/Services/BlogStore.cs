@@ -101,14 +101,14 @@ namespace Blogging.Services
         public Task<BlogRevision> GetLastRevisionAsync(BlogPost post)
         {
             return Context.Set<BlogRevision>()
-                .Where(r => r.BlogId == post.Id && r.Version == post.Revision)
+                .Where(r => r.PostId == post.Id && r.Version == post.Revision)
                 .SingleOrDefaultAsync();
         }
 
         public Task<List<BlogRevision>> GetRevisionsAsync(BlogPost post)
         {
             return Context.Set<BlogRevision>()
-                .Where(r => r.BlogId == post.Id)
+                .Where(r => r.PostId == post.Id)
                 .OrderBy(r => r.Version)
                 .ToListAsync();
         }
@@ -117,7 +117,7 @@ namespace Blogging.Services
         {
             var e = Context.Set<BlogRevision>().Add(new BlogRevision
             {
-                BlogId = post.Id,
+                PostId = post.Id,
                 ContentRaw = rawContent,
                 Time = DateTimeOffset.Now,
                 Version = post.Revision + 1

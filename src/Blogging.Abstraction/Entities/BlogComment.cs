@@ -3,66 +3,71 @@ using System.Collections.Generic;
 
 namespace Blogging.Entities
 {
+    /// <summary>
+    /// The entity class for blogging comments.
+    /// </summary>
     public class BlogComment
     {
         /// <summary>
-        /// 评论ID
+        /// The comment ID
         /// </summary>
         public int Id { get; set; }
 
         /// <summary>
-        /// 博客文章ID
+        /// The belonging post ID
         /// </summary>
         public int PostId { get; set; }
 
         /// <summary>
-        /// 创建用户
+        /// The user ID of author
         /// </summary>
         public int UserId { get; set; }
 
         /// <summary>
-        /// 显示内容的HTML
+        /// The content HTML to display
         /// </summary>
         public string ContentHtml { get; set; }
 
         /// <summary>
-        /// 是否已经被删除
+        /// Whether this comment is deleted
         /// </summary>
         public bool IsDeleted { get; set; }
 
         /// <summary>
-        /// 回复的评论
+        /// The replied comment ID
         /// </summary>
         public int? ReplyToId { get; set; }
 
         /// <summary>
-        /// 修订版本号
+        /// The revision number
         /// </summary>
         public int Revision { get; set; }
 
         /// <summary>
-        /// 支持数
+        /// The count of up votes
         /// </summary>
         public int UpVotes { get; set; }
 
         /// <summary>
-        /// 反对数
+        /// The count of down votes
         /// </summary>
         public int DownVotes { get; set; }
 
         /// <summary>
-        /// 发布时间
+        /// The publish time of this comment
         /// </summary>
         public DateTimeOffset PublishTime { get; set; }
 
         /// <summary>
-        /// [Ignored] 所有回复
+        /// The replying comments
         /// </summary>
+        /// <remarks>This property is used only in store, not in persist layer.</remarks>
         public ICollection<BlogComment> Replies { get; set; }
 
         /// <summary>
-        /// [Ignored] 用户信息
+        /// The user information
         /// </summary>
+        /// <remarks>This property is used only in store, not in persist layer.</remarks>
         public (int? Rating, string UserName, string Email) UserDetail { get; set; }
     }
 }

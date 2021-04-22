@@ -2,35 +2,38 @@
 
 namespace Blogging.Entities
 {
+    /// <summary>
+    /// The entity class for revisions on posts or comments.
+    /// </summary>
     public class BlogRevision
     {
         /// <summary>
-        /// 博客修订内容
+        /// The unique ID for revisions
         /// </summary>
         public int RevisionId { get; set; }
 
         /// <summary>
-        /// 评论ID
+        /// The belonging comment ID
         /// </summary>
         public int? CommentId { get; set; }
 
         /// <summary>
-        /// 博客文章ID
+        /// The belonging post ID
         /// </summary>
-        public int? BlogId { get; set; }
+        public int? PostId { get; set; }
 
         /// <summary>
-        /// 修订版本号
+        /// The revision
         /// </summary>
         public int Version { get; set; }
 
         /// <summary>
-        /// 原始博客内容
+        /// The raw markdown for content
         /// </summary>
         public string ContentRaw { get; set; }
 
         /// <summary>
-        /// 修订时间
+        /// The revision time
         /// </summary>
         public DateTimeOffset Time { get; set; }
     }
