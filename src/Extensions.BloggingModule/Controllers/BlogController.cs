@@ -161,8 +161,10 @@ namespace SatelliteSite.BloggingModule.Controllers
             if (model == null || (!User.IsInRole("Administrator") && User.GetUserId() != model.UserId.ToString()))
                 return NotFound();
 
-            return AskPost("Delete the comment", "Are you sure to delete this comment?",
-                "Misc", "Blog", "DeleteComment", new { postId, commentId });
+            return AskPost(
+                title: "Delete the comment",
+                message: "Are you sure to delete this comment?",
+                type: BootstrapColor.danger);
         }
 
 

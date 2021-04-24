@@ -15,7 +15,7 @@
 
 <div class="card window-card container-fluid">
 <div class="card-body">
-<h2 class="mb-3">Blogs</h2>
+<h2 class="mb-3">Blogs<razor asp-show-if="user != null"> of <user uid="user.Id" username="@user.UserName" /></razor></h2>
 <p class="mb-0">
     <a asp-show-if="user == null || user.Id.ToString() == User.GetUserId()" asp-in-roles="Administrator,BlogPublisher" asp-action="Publish" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Publish</a>
 </p>
