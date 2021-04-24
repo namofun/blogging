@@ -8,6 +8,8 @@ namespace Blogging.Services
         where TUser : SatelliteSite.IdentityModule.Entities.User
         where TContext : DbContext
     {
+        public const string PreparingInternally = "<p class=\"text-muted\">Preparing internally...</p>";
+
         public IBlogStore Blogs => this;
 
         public ICommentStore Comments => this;

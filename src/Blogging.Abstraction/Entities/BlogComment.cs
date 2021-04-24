@@ -68,6 +68,6 @@ namespace Blogging.Entities
         /// The user information
         /// </summary>
         /// <remarks>This property is used only in store, not in persist layer.</remarks>
-        public (int? Rating, string UserName, string Email) UserDetail { get; set; }
+        public (string UserName, string Email) UserDetail { get; set; }
     }
 }

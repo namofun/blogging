@@ -22,7 +22,7 @@ namespace Blogging.Services
             {
                 PublishTime = DateTimeOffset.Now,
                 UserId = uid,
-                ContentHtml = "Preparing internally...",
+                ContentHtml = PreparingInternally,
             });
 
             await Context.SaveChangesAsync();
@@ -39,27 +39,20 @@ namespace Blogging.Services
 
         public async Task<List<BlogPost>> ListAsync(int? byUser = null, int count = 10, int skip = 0)
         {
-            var lst = Context.Set<BlogPost>()
-                .Where(p => !p.IsDeleted);
-            if (byUser.HasValue)
-                lst = lst.Where(p => p.UserId == byUser);
-            else
-                lst = lst.Where(p => p.CommonShared);
-            var lst2 =
-                from p in lst
-                join u in Context.Set<TUser>() on p.UserId equals u.Id
-                select new { p, u.UserName, u.Email };
-            var lst3 = await lst2
+            var lst = await Context.Set<BlogPost>()
+                .Where(p => !p.IsDeleted)
+                .WhereIf(byUser.HasValue, p => p.UserId == byUser)
+                .WhereIf(!byUser.HasValue, p => p.CommonShared)
+                .Join(Context.Set<TUser>(), p => p.UserId, u => u.Id, (p, u) => new { p, u.UserName, u.Email })
                 .OrderByDescending(a => a.p.Id)
                 .Skip(skip).Take(count)
                 .ToListAsync();
 
-            return lst3
+            return lst
                 .Select(a =>
                 {
-                    var item = a.p;
-                    item.UserDetail = (null, a.UserName, a.Email);
-                    return item;
+                    a.p.UserDetail = (a.UserName, a.Email);
+                    return a.p;
                 })
                 .ToList();
         }
@@ -74,7 +67,7 @@ namespace Blogging.Services
             var post2 = await post2Query.SingleOrDefaultAsync();
             if (post2 == null) return null;
             var post = post2.p;
-            post.UserDetail = (null, post2.UserName, post2.Email);
+            post.UserDetail = (post2.UserName, post2.Email);
 
             post.Comments = new List<BlogComment>();
             var comment2Query =
@@ -88,7 +81,7 @@ namespace Blogging.Services
             foreach (var item2 in comments2)
             {
                 var item = item2.c;
-                item.UserDetail = (null, item2.UserName, item2.Email);
+                item.UserDetail = (item2.UserName, item2.Email);
                 if (item.ReplyToId == null)
                     post.Comments.Add(item);
                 else

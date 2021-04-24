@@ -17,7 +17,7 @@ namespace Blogging.Services
                 PostId = post.Id,
                 UserId = uid,
                 ReplyToId = replyTo?.Id,
-                ContentHtml = "Preparing internally...",
+                ContentHtml = PreparingInternally,
             });
 
             await Context.SaveChangesAsync();
