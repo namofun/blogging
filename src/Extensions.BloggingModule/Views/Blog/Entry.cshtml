@@ -1,6 +1,7 @@
 ﻿@model BlogPost
 @{
     ViewData["Title"] = "Blog";
+    ViewData["UseCardTheme"] = true;
     Dictionary<int, BlogCommentVote> cv = ViewBag.CommentVote;
     BlogPostVote pv = ViewBag.PostVote;
     int.TryParse(User.GetUserId() ?? "-100", out int uid);
@@ -15,7 +16,7 @@
         <div class="comment media" id="C@(comment.Id)">
             <div class="comment-avatar mr-3 text-center">
                 <div class="d-block"><img gravatar-email="@comment.UserDetail.Email" style="height:64px;width:64px" /></div>
-                <a asp-area="Account" asp-controller="Profile" asp-action="Show" asp-route-username="@comment.UserDetail.UserName">@comment.UserDetail.UserName</a>
+                <user uid="@Model.UserId" username="@comment.UserDetail.UserName" />
             </div>
             <div class="media-body">
                 <div class="comment-toolbar text-muted mb-1" style="font-size:0.8em">
@@ -75,7 +76,7 @@
 <div class="card-body">
 <div class="blog-title">
     <h2><a class="text-decoration-none text-reset" asp-action="Entry" asp-controller="Blog" asp-route-postId="@Model.Id">@Model.Title</a></h2>
-    <p class="mb-0">By <a asp-area="Account" asp-controller="Profile" asp-action="Show" asp-route-username="@Model.UserDetail.UserName">@Model.UserDetail.UserName</a>, <span title="@Model.PublishTime">@Html.AutoUnitTimespan(DateTimeOffset.Now - Model.PublishTime) ago</span><razor asp-show-if="Model.Revision > 1">, revision @Model.Revision</razor><razor asp-show-if="Model.UserId.ToString() == User.GetUserId()">, <a asp-action="Publish">edit</a></razor>.</p>
+    <p class="mb-0">By <user uid="@Model.UserId" username="@Model.UserDetail.UserName" />, <span title="@Model.PublishTime">@Html.AutoUnitTimespan(DateTimeOffset.Now - Model.PublishTime) ago</span><razor asp-show-if="Model.Revision > 1">, revision @Model.Revision</razor><razor asp-show-if="Model.UserId.ToString() == User.GetUserId()">, <a asp-action="Publish">edit</a></razor>.</p>
 </div>
 <hr class="blog-line-separator" />
 <div class="blog-content">

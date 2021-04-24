@@ -1,6 +1,7 @@
 ﻿@model List<BlogPost>
 @{
     ViewData["Title"] = "Blogs";
+    ViewData["UseCardTheme"] = true;
     Dictionary<int, BlogPostVote> pv = ViewBag.PostsVote;
     IUser user = ViewBag.User;
 }
