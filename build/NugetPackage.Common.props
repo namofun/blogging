@@ -8,8 +8,10 @@
     <PackageReleaseNotes>Blogging Module</PackageReleaseNotes>
     <RepositoryUrl>https://github.com/namofun/blogging</RepositoryUrl>
     <Authors>yang-er</Authors>
-    <Version>1.0.0</Version>
-    <PackageVersion>1.0.$(PreviewBuild)</PackageVersion>
+    <Version>1.1.0</Version>
+    <PackageVersion>1.1.$(PreviewBuild)</PackageVersion>
+    <AssemblyVersion>$(PackageVersion).0</AssemblyVersion>
+    <FileVersion>$(PackageVersion).0</FileVersion>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
