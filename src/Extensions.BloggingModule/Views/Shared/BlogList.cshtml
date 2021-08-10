@@ -17,7 +17,7 @@
 </div>
 <hr class="blog-line-separator blog-line-separator-end" />
 <p class="mb-0">
-    <span class="voting" id="blog_vote_@(p.Id)"><partial name="VotingDetail" model="(p.Id, (int?)null, p.UpVotes, p.DownVotes, pv?.GetValueOrDefault(p.Id)?.Up)" /></span>
+    <span class="voting" id="blog_vote_@(p.Id)"><partial name="/Areas/Blog/Views/Shared/VotingDetail.cshtml" model="(p.Id, (int?)null, p.UpVotes, p.DownVotes, pv?.GetValueOrDefault(p.Id)?.Up)" /></span>
 </p>
 </div>
 </div>

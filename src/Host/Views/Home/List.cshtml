@@ -1,0 +1,39 @@
+﻿@using Blogging.Entities
+@using Microsoft.AspNetCore.Identity 
+@addTagHelper *, Microsoft.AspNetCore.Mvc.TagHelpers
+@addTagHelper *, SatelliteSite.Substrate
+@model List<BlogPost>
+@{
+    Layout = "_Layout";
+    ViewData["Title"] = "Blogs";
+    ViewData["UseCardTheme"] = true;
+    Dictionary<int, BlogPostVote> pv = ViewBag.PostsVote;
+    IUser user = ViewBag.User;
+}
+<link rel="stylesheet" href="/lib/site-blog/main.css" />
+
+<div class="row">
+<div class="container card-container">
+
+<partial name="_StatusMessage" model="@TempData["StatusMessage"]" />
+@{ TempData.Remove("StatusMessage"); }
+
+<div class="card window-card container-fluid">
+<div class="card-body">
+<h2 class="mb-3">Blogs<razor asp-show-if="user != null"> of <user uid="user.Id" username="@user.UserName" /></razor></h2>
+<p class="mb-0">
+    <a asp-show-if="user == null || user.Id.ToString() == User.GetUserId()" asp-in-roles="Administrator,BlogPublisher" asp-action="Publish" class="btn btn-primary"><i class="fas fa-paper-plane"></i> Publish</a>
+</p>
+</div>
+</div>
+
+<partial name="/Areas/Blog/Views/Shared/BlogList.cshtml" model="@Model" />
+
+<div class="card window-card container-fluid card-pagination">
+<div class="card-body">
+    <pagination bs-current-page="@ViewBag.Page" />
+</div>
+</div>
+
+</div>
+</div>
