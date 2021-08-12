@@ -9,7 +9,7 @@ namespace Markdig
     {
         public static IServiceCollection AddMarkdown(
             this IServiceCollection services,
-            Action<MarkdigOptions> action = null)
+            Action<MarkdigOptions>? action = null)
         {
             services.AddTransient<IMarkdownService, MarkdigService>();
 
@@ -19,7 +19,7 @@ namespace Markdig
                     .Use<KatexExtension>()
                     .Use<HeadingIdExtension>()
                     .UseSoftlineBreakAsHardlineBreak()
-                    .UseNoFollowLinks()
+                    .UseReferralLinks("nofollow")
                     .UsePipeTables()
                     .UseBootstrap();
 

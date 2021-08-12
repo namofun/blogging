@@ -44,6 +44,6 @@ namespace Markdig
         /// <param name="source">Markdown source</param>
         /// <param name="converter">Url translator</param>
         /// <returns>A task for the translated source</returns>
-        Task<string> SolveImagesUrlAsync(string source, Func<string, Task<string>> converter);
+        Task<string> SolveImagesUrlAsync(string source, Func<string?, Task<string?>> converter);
     }
 }

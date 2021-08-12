@@ -9,9 +9,9 @@ namespace Markdig.Extensions.Toc
     {
         public int Level { get; set; }
 
-        public string Id { get; set; }
+        public string? Id { get; set; }
 
-        public string Title { get; set; }
+        public string? Title { get; set; }
 
         public List<HeadingNode> Children { get; }
 

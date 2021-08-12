@@ -11,12 +11,12 @@ namespace Markdig.Extensions.Toc
         private static void AddGuidIdAttribute(BlockProcessor blockProcessor, Block block)
         {
             var attrs = block.GetAttributes();
-            attrs.Id = attrs.Id ?? Guid.NewGuid().ToString().Substring(0, 8);
+            attrs.Id ??= Guid.NewGuid().ToString().Substring(0, 8);
         }
 
         public void Setup(MarkdownPipelineBuilder pipeline)
         {
-            pipeline.BlockParsers.Find<HeadingBlockParser>()
+            pipeline.BlockParsers.Find<HeadingBlockParser>()!
                 .Closed += AddGuidIdAttribute;
         }
 

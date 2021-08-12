@@ -42,7 +42,7 @@ namespace Markdig
             }
         }
 
-        public async Task<string> SolveImagesUrlAsync(string source, Func<string, Task<string>> converter)
+        public async Task<string> SolveImagesUrlAsync(string source, Func<string?, Task<string?>> converter)
         {
             using (var tw = new StringWriter())
             {
@@ -73,7 +73,7 @@ namespace Markdig
                 {
                     Id = item.GetAttributes().Id,
                     Level = item.Level,
-                    Title = item.Inline?.FirstChild.ToString()
+                    Title = item.Inline?.FirstChild?.ToString()
                 });
             }
 

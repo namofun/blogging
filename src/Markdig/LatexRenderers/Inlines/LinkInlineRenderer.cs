@@ -6,17 +6,15 @@ namespace Markdig.Renderers.LaTeX.Inlines
     {
         protected override void Write(LatexRenderer renderer, LinkInline link)
         {
+            var finalLink = (link.GetDynamicUrl != null ? link.GetDynamicUrl() ?? link.Url : link.Url) ?? "";
+
             if (link.IsImage)
             {
-                renderer.Write("\\includegraphics{");
-                renderer.Write(link.GetDynamicUrl != null ? link.GetDynamicUrl() ?? link.Url : link.Url);
-                renderer.Write("}");
+                renderer.Write("\\includegraphics{").Write(finalLink).Write("}");
             }
             else
             {
-                renderer.Write("\\texttt{");
-                renderer.WriteEscape(link.GetDynamicUrl != null ? link.GetDynamicUrl() ?? link.Url : link.Url);
-                renderer.Write("}");
+                renderer.Write("\\texttt{").WriteEscape(finalLink).Write("}");
             }
         }
     }
