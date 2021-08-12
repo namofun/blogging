@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk">
+﻿<Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
     <TargetFramework>netstandard2.0</TargetFramework>
@@ -10,7 +10,7 @@
   <Import Project="..\..\build\NugetPackage.props" />
 
   <ItemGroup>
-    <PackageReference Include="Markdig.Service" Version="0.18.3.1" />
+    <ProjectReference Include="..\Markdig\Markdig.Service.csproj" />
     <PackageReference Include="SatelliteSite.Abstraction" Version="$(SubstrateVersion)" />
   </ItemGroup>
 

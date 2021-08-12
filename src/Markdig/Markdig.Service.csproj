@@ -1,0 +1,23 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <Title>Markdig.Service</Title>
+    <Authors>xoofx;yang-er</Authors>
+    <Description>Services and extensions using dependency injection with Markdig</Description>
+    <PackageProjectUrl>https://github.com/yang-er/Markdig.Service</PackageProjectUrl>
+    <Company />
+    <PackageLicenseExpression>MIT</PackageLicenseExpression>
+    <PackageTags>markdown</PackageTags>
+    <PackageReleaseNotes>Initial version.</PackageReleaseNotes>
+    <PackageVersion>$(MarkdigServiceVersion)</PackageVersion>
+    <RepositoryUrl>https://github.com/yang-er/Markdig.Service</RepositoryUrl>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Markdig" Version="$(MarkdigVersion)" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(BaseExtensionsVersion)" />
+    <PackageReference Include="Microsoft.Extensions.Options" Version="$(BaseExtensionsVersion)" />
+  </ItemGroup>
+
+</Project>
