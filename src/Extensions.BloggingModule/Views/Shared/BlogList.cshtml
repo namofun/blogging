@@ -8,7 +8,7 @@
 <div class="card window-card container-fluid">
 <div class="card-body">
 <div class="blog-title">
-    <h2><a class="text-decoration-none text-reset" asp-action="Entry" asp-controller="Blog" asp-route-postId="@p.Id">@p.Title</a></h2>
+    <h2><a class="text-decoration-none text-reset" asp-area="Blog" asp-action="Entry" asp-controller="Blog" asp-route-postId="@p.Id">@p.Title</a></h2>
     <p class="mb-0">By <user uid="@p.UserId" username="@p.UserDetail.UserName" />, <span title="@p.PublishTime">@Html.AutoUnitTimespan(DateTimeOffset.Now - p.PublishTime) ago</span><razor asp-show-if="p.Revision > 1">, revision @p.Revision</razor>.</p>
 </div>
 <hr class="blog-line-separator" />
