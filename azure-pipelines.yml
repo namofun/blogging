@@ -56,3 +56,15 @@ jobs:
       allowPackageConflicts: true
     displayName: 'Push to NuGet Feed'
     condition: startsWith(variables['Build.SourceBranch'], 'refs/tags/')
+
+- job: Sync
+  displayName: "Sync with Azure Repos"
+
+  pool:
+    vmImage: ubuntu-latest
+
+  steps:
+  - task: gitsync@1
+    inputs:
+      GitRepoUrl: 'https://tlylz:$(SYNC_PAT)@dev.azure.com/tlylz/namomo/_git/blogging'
+    displayName: 'Sync to Azure Repos'
