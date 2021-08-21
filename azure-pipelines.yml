@@ -67,8 +67,9 @@ jobs:
   - task: CmdLine@2
     inputs:
       script: |
-        git remote add target https://tlylz:$(System.AccessToken)@dev.azure.com/tlylz/namomo/_git/blogging
+        git remote add target https://tlylz:$(SYNC_PAT)@dev.azure.com/tlylz/namomo/_git/blogging
         git checkout $(Build.SourceBranchName)
         git pull target $(Build.SourceBranchName) --tags
         git push target --all
         git push target HEAD:$(Build.SourceBranchName) --tags
+    displayName: 'Sync via Git Tools'
