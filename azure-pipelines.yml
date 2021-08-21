@@ -64,7 +64,11 @@ jobs:
     vmImage: ubuntu-latest
 
   steps:
-  - task: gitsync@1
+  - task: CmdLine@2
     inputs:
-      GitRepoUrl: 'https://tlylz:$(SYNC_PAT)@dev.azure.com/tlylz/namomo/_git/blogging'
-    displayName: 'Sync to Azure Repos'
+      script: |
+        git remote add target https://tlylz:$(System.AccessToken)@dev.azure.com/tlylz/namomo/_git/blogging
+        git checkout $(Build.SourceBranchName)
+        git pull target $(Build.SourceBranchName) --tags
+        git push target --all
+        git push target HEAD:$(Build.SourceBranchName) --tags
