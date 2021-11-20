@@ -1,25 +1,13 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <TargetFramework>net6.0</TargetFramework>
     <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
     <DescriptionAttach>The blogging module</DescriptionAttach>
+    <StaticWebAssetBasePath>/lib/site-blog</StaticWebAssetBasePath>
   </PropertyGroup>
 
   <Import Project="..\..\build\NugetPackage.props" />
-
-  <PropertyGroup>
-    <ResolveCurrentProjectStaticWebAssetsInputsDependsOn>
-      SetStaticWebAssetsBasePath;
-      $(ResolveCurrentProjectStaticWebAssetsInputsDependsOn)
-    </ResolveCurrentProjectStaticWebAssetsInputsDependsOn>
-  </PropertyGroup>
-
-  <Target Name="SetStaticWebAssetsBasePath">
-    <PropertyGroup>
-      <StaticWebAssetBasePath>/lib/site-blog</StaticWebAssetBasePath>
-    </PropertyGroup>
-  </Target>
 
   <ItemGroup>
     <PackageReference Include="SatelliteSite.Substrate" Version="$(SubstrateVersion)" />

@@ -1,12 +1,12 @@
 ﻿<Project>
   <PropertyGroup>
     <GitRepositoryDirectory>$(MSBuildThisFileDirectory).git</GitRepositoryDirectory>
-    <SubstrateVersion>1.0.39</SubstrateVersion>
+    <SubstrateVersion>1.0.42</SubstrateVersion>
     <PreviewBuild>14</PreviewBuild>
     <MarkdigServiceVersion>0.25.0.2</MarkdigServiceVersion>
-    <EFCoreBulkVersion>3.1.26</EFCoreBulkVersion>
-    <AspNetCoreVersion>3.1.15</AspNetCoreVersion>
-    <BaseExtensionsVersion>3.1.0</BaseExtensionsVersion>
+    <EFCoreBulkVersion>6.0.27-preview</EFCoreBulkVersion>
+    <AspNetCoreVersion>6.0.0</AspNetCoreVersion>
+    <BaseExtensionsVersion>6.0.0</BaseExtensionsVersion>
     <MarkdigVersion>0.25.0</MarkdigVersion>
   </PropertyGroup>
 </Project>
