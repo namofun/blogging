@@ -76,7 +76,7 @@ jobs:
   displayName: "Sync with Azure Repos"
 
   pool:
-    vmImage: ubuntu-latest
+    vmImage: windows-latest
 
   steps:
   - task: gitmirror@0
