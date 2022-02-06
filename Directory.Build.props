@@ -1,12 +1,19 @@
 ﻿<Project>
+
   <PropertyGroup>
     <GitRepositoryDirectory>$(MSBuildThisFileDirectory).git</GitRepositoryDirectory>
-    <SubstrateVersion>1.0.42</SubstrateVersion>
+    <SubstrateVersion>1.1.43</SubstrateVersion>
     <PreviewBuild>15</PreviewBuild>
-    <MarkdigServiceVersion>0.25.0.3</MarkdigServiceVersion>
-    <EFCoreBulkVersion>6.0.27-preview</EFCoreBulkVersion>
+    <MarkdigServiceVersion>0.25.0.4</MarkdigServiceVersion>
+    <EFCoreBulkVersion>6.0.29</EFCoreBulkVersion>
     <AspNetCoreVersion>6.0.0</AspNetCoreVersion>
     <BaseExtensionsVersion>6.0.0</BaseExtensionsVersion>
     <MarkdigVersion>0.25.0</MarkdigVersion>
   </PropertyGroup>
+
+  <PropertyGroup>
+    <SignAssembly>True</SignAssembly>
+    <AssemblyOriginatorKeyFile>$(MSBuildThisFileDirectory)build\xylab.snk</AssemblyOriginatorKeyFile>
+  </PropertyGroup>
+
 </Project>

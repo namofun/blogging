@@ -16,7 +16,7 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Markdig" Version="$(MarkdigVersion)" />
+    <PackageReference Include="Markdig.Signed" Version="$(MarkdigVersion)" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="$(BaseExtensionsVersion)" />
     <PackageReference Include="Microsoft.Extensions.Options" Version="$(BaseExtensionsVersion)" />
   </ItemGroup>
