@@ -1,9 +1,9 @@
 ﻿#nullable enable
-using Blogging.Entities;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Xylab.Blogging.Entities;
 
-namespace Blogging.Services
+namespace Xylab.Blogging.Services
 {
     /// <summary>
     /// The store conventions for blogging comments.

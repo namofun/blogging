@@ -1,8 +1,8 @@
 ﻿#nullable enable
-using Blogging.Entities;
 using System.Linq;
+using Xylab.Blogging.Entities;
 
-namespace Blogging.Services
+namespace Xylab.Blogging.Services
 {
     /// <summary>
     /// The <see cref="IQueryable{T}"/> store.

@@ -5,7 +5,7 @@ using Markdig.Syntax;
 using Markdig.Syntax.Inlines;
 using System;
 
-namespace Blogging.Services
+namespace Xylab.Blogging.Services
 {
     /// <summary>
     /// The permission enum.

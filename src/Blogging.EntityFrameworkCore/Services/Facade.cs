@@ -1,8 +1,8 @@
-﻿using Blogging.Entities;
-using Microsoft.EntityFrameworkCore;
+﻿using Microsoft.EntityFrameworkCore;
 using System.Linq;
+using Xylab.Blogging.Entities;
 
-namespace Blogging.Services
+namespace Xylab.Blogging.Services
 {
     public partial class BloggingFacade<TUser, TContext> : IBloggingFacade, IBloggingQueryableStore
         where TUser : SatelliteSite.IdentityModule.Entities.User

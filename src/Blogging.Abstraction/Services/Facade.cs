@@ -1,6 +1,6 @@
 ﻿#nullable enable
 
-namespace Blogging.Services
+namespace Xylab.Blogging.Services
 {
     /// <summary>
     /// The facade for blogging related things.

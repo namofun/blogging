@@ -1,7 +1,7 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
-namespace Blogging.Entities
+namespace Xylab.Blogging.Entities
 {
     public class BlogEntityConfiguration<TUser, TContext> :
         EntityTypeConfigurationSupplier<TContext>,

@@ -2,7 +2,7 @@
 using Markdig.Renderers;
 using System.IO;
 
-namespace Blogging.Services
+namespace Xylab.Blogging.Services
 {
     /// <summary>
     /// The permission markdown resolver.

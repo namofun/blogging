@@ -3,7 +3,8 @@
   <PropertyGroup>
     <TargetFramework>net6.0</TargetFramework>
     <DescriptionAttach>The blogging implementation</DescriptionAttach>
-    <RootNamespace>Blogging</RootNamespace>
+    <AssemblyName>Xylab.Blogging.EntityFrameworkCore</AssemblyName>
+    <RootNamespace>Xylab.Blogging</RootNamespace>
   </PropertyGroup>
 
   <Import Project="..\..\build\NugetPackage.props" />

@@ -1,7 +1,7 @@
 ﻿#nullable enable
 using System;
 
-namespace Blogging.Services
+namespace Xylab.Blogging.Services
 {
     /// <summary>
     /// The queryable extensions for blogging relate things.

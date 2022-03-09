@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 
-namespace Blogging.Entities
+namespace Xylab.Blogging.Entities
 {
     /// <summary>
     /// The entity class for blogging posts.

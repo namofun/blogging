@@ -1,11 +1,11 @@
-﻿using Blogging.Entities;
-using Blogging.Services;
-using Markdig;
+﻿using Markdig;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using SatelliteSite;
+using Xylab.Blogging.Entities;
+using Xylab.Blogging.Services;
 
 [assembly: RoleDefinition(25, "BlogPublisher", "blogger", "Blog Publisher")]
 
