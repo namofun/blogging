@@ -23,6 +23,7 @@ namespace SatelliteSite
                 .AddModule<HostModule>()
                 .AddModule<IdentityModule.IdentityModule<User, Role, DefaultContext>>()
                 .AddModule<BloggingModule.BloggingModule<User, DefaultContext>>()
+                .AddModule<NewsModule.NewsModule<DefaultContext>>()
                 .AddDatabase<DefaultContext>((c, b) => b.UseSqlServer(c.GetConnectionString("UserDbConnection"), b => b.UseBulk()))
                 .ConfigureSubstrateDefaults<DefaultContext>();
     }

@@ -1,0 +1,20 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Razor">
+
+  <PropertyGroup>
+    <TargetFramework>net6.0</TargetFramework>
+    <AddRazorSupportForMvc>true</AddRazorSupportForMvc>
+    <DescriptionAttach>The news module</DescriptionAttach>
+    <StaticWebAssetBasePath>/lib/site-news</StaticWebAssetBasePath>
+  </PropertyGroup>
+
+  <Import Project="..\..\build\NugetPackage.props" />
+
+  <ItemGroup>
+    <PackageReference Include="SatelliteSite.Substrate" Version="$(SubstrateVersion)" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Markdig\Markdig.Service.csproj" />
+  </ItemGroup>
+
+</Project>

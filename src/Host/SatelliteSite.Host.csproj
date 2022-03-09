@@ -8,6 +8,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\Extensions.BloggingModule\SatelliteSite.BloggingModule.csproj" />
+    <ProjectReference Include="..\NewsModule\SatelliteSite.NewsModule.csproj" />
   </ItemGroup>
 
   <ItemGroup>
