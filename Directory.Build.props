@@ -7,8 +7,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <SubstrateVersion>1.1.43</SubstrateVersion>
-    <PreviewBuild>15</PreviewBuild>
+    <SubstrateVersion>1.1.44</SubstrateVersion>
+    <PreviewBuild>16</PreviewBuild>
     <MarkdigServiceVersion>0.25.0.4</MarkdigServiceVersion>
     <EFCoreBulkVersion>6.0.29</EFCoreBulkVersion>
     <AspNetCoreVersion>6.0.0</AspNetCoreVersion>
